@@ -32,14 +32,19 @@ function showEmptyState() {
   const emptyState = document.createElement("div");
   emptyState.className = "empty-state";
   emptyState.innerHTML = `
-    <i class="fas fa-comments"></i>
-    <h2>Start a conversation</h2>
-    <p>Ask me anything! I'm here to help with information, tasks, or just to chat.</p>
+    <div class="creator-badge">
+      <img src="https://media.licdn.com/dms/image/v2/D4E03AQFP6KpMCbkirw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1713782757422?e=1751500800&v=beta&t=bL5W2TkUNfIysKQ9LAOGUOh1YHiyvIsakupAY1gJVUg" alt="Ankit Kumar" class="avatar" />
+      <div class="creator-info">
+        <h2>Hi, I'm Ankit's AI Assistant! 👋</h2>
+        <p>Created by Ankit Kumar</p>
+      </div>
+    </div>
+    <p class="welcome-text">I can help you with various tasks, provide information, or just chat. What would you like to know?</p>
     <div class="suggestion-chips">
-      <div class="suggestion-chip">What can you do?</div>
-      <div class="suggestion-chip">Tell me a fun fact</div>
-      <div class="suggestion-chip">How does AI work?</div>
-      <div class="suggestion-chip">Write a poem about technology</div>
+      <div class="suggestion-chip">Tell me a fun fact 🤔</div>
+      <div class="suggestion-chip">What can you do? 🚀</div>
+      <div class="suggestion-chip">How does AI work? 👨‍💻</div>
+      <div class="suggestion-chip">Show me something cool ✨</div>
     </div>
   `;
   chat.appendChild(emptyState);
@@ -48,7 +53,10 @@ function showEmptyState() {
   const chips = emptyState.querySelectorAll(".suggestion-chip");
   chips.forEach((chip) => {
     chip.addEventListener("click", () => {
-      userInput.value = chip.textContent;
+      userInput.value =
+        chip.textContent.split(" ")[0] +
+        " " +
+        chip.textContent.split(" ").slice(1, -1).join(" ");
       sendMessage();
     });
   });

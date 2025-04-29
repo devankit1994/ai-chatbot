@@ -657,3 +657,79 @@ body.dark-mode .message.ai blockquote {
 body.dark-mode .message.ai a {
   color: var(--secondary-color);
 }
+
+.creator-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(110, 142, 251, 0.1);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+}
+
+.creator-info h2 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.creator-info p {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+}
+
+.welcome-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: inherit;
+}
+
+.github-link {
+  color: #64748b;
+  font-size: 1.25rem;
+  margin-right: 1rem;
+  transition: var(--transition);
+}
+
+.github-link:hover {
+  color: var(--secondary-color);
+}
+
+body.dark-mode .github-link {
+  color: #e2e8f0;
+}
+
+body.dark-mode .creator-badge {
+  background: rgba(110, 142, 251, 0.15);
+}
+
+.suggestion-chip {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  font-weight: 500;
+}
+
+.suggestion-chip:hover {
+  background: linear-gradient(135deg, #5d7cfa, #965dd0);
+  border: none;
+  transform: translateY(-2px);
+}
+
+body.dark-mode .suggestion-chip {
+  opacity: 0.9;
+}
+
+body.dark-mode .suggestion-chip:hover {
+  opacity: 1;
+}
