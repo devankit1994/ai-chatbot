@@ -33,11 +33,22 @@ const openai = new OpenAI({
 
 app.post("/api/chat", async (req, res) => {
   const userMessage = req.body.message;
+  const messageHistory = req.body.history || [];
 
   try {
+    const messages = [
+      {
+        role: "system",
+        content:
+          "You are a helpful and friendly AI assistant. Be concise and clear in your responses.",
+      },
+      ...messageHistory,
+      { role: "user", content: userMessage },
+    ];
+
     const response = await openai.chat.completions.create({
       model: "meta-llama/llama-4-maverick",
-      messages: [{ role: "user", content: userMessage }],
+      messages: messages,
       temperature: 0.7,
       max_tokens: 1000,
     });
@@ -46,6 +57,7 @@ app.post("/api/chat", async (req, res) => {
 
     res.json({
       reply,
+      role: "assistant",
     });
   } catch (error) {
     console.error("Error:", error.message);

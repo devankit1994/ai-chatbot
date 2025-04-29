@@ -54,6 +54,8 @@ function showEmptyState() {
   });
 }
 
+let conversationHistory = [];
+
 async function sendMessage() {
   const input = userInput.value.trim();
   if (!input || isWaitingForResponse) return;
@@ -66,6 +68,9 @@ async function sendMessage() {
 
   appendMessage("user", input);
   userInput.value = "";
+
+  // Add user message to history
+  conversationHistory.push({ role: "user", content: input });
 
   // Show typing indicator
   isWaitingForResponse = true;
@@ -85,6 +90,7 @@ async function sendMessage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         message: input,
+        history: conversationHistory,
       }),
     });
 
@@ -98,6 +104,9 @@ async function sendMessage() {
     chat.removeChild(typingIndicator);
 
     appendMessage("ai", data.reply);
+
+    // Add AI response to history
+    conversationHistory.push({ role: "assistant", content: data.reply });
   } catch (err) {
     console.error("Error:", err);
 
@@ -148,8 +157,9 @@ userInput.addEventListener("keypress", (e) => {
 
 // Clear chat functionality
 clearChatBtn.addEventListener("click", () => {
-  chat.innerHTML = ""; // Clear the chat content
-  showEmptyState(); // Show the initial empty state again
+  chat.innerHTML = "";
+  conversationHistory = []; // Clear the conversation history
+  showEmptyState();
 });
 
 // Focus input on page load
